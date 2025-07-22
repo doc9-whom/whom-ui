@@ -13,14 +13,22 @@ const meta = {
   args: {
     children: 'Button',
     onClick: fn(),
-    variant: 'default',
-    size: 'md',
+    variant: 'primary',
+    size: 'lg',
     disabled: false,
   },
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'primary', 'ghost'],
+      options: [
+        'primary',
+        'primaryGray',
+        'secondaryOutline',
+        'secondaryGray',
+        'tertiary',
+        'linkGray',
+        'linkColor',
+      ],
     },
     size: {
       control: { type: 'select' },
@@ -30,25 +38,49 @@ const meta = {
       control: { type: 'boolean' },
     },
   },
-} satisfies Meta;
+} satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj;
+type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {};
+export const Primary: Story = {};
 
-export const Primary: Story = {
-  args: { variant: 'primary' },
+export const PrimaryGray: Story = {
+  args: { variant: 'primaryGray' },
 };
 
-export const Ghost: Story = {
-  args: { variant: 'ghost' },
+export const SecondaryOutline: Story = {
+  args: { variant: 'secondaryOutline' },
+};
+
+export const SecondaryGray: Story = {
+  args: { variant: 'secondaryGray' },
+};
+
+export const Tertiary: Story = {
+  args: { variant: 'tertiary' },
+};
+
+export const LinkGray: Story = {
+  args: { variant: 'linkGray' },
+};
+
+export const LinkColor: Story = {
+  args: { variant: 'linkColor' },
 };
 
 export const Small: Story = {
   args: { size: 'sm' },
 };
 
+export const Medium: Story = {
+  args: { size: 'md' },
+};
+
 export const Large: Story = {
   args: { size: 'lg' },
+};
+
+export const Disabled: Story = {
+  args: { disabled: true },
 };

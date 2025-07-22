@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-brand-500: #0a4ad6;
+  --color-brand-600: #0a3db0;
+
+  --color-text-disabled: #a9a9bc;
+}
+
+@layer utilities {
+  .example {
+  }
+}
