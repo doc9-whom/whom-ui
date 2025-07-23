@@ -4,9 +4,9 @@ import { CheckIcon, MinusIcon } from 'lucide-react';
 import clsx from 'clsx';
 
 import { checkboxBaseVariants } from './variants';
-import { CheckboxBaseProps } from './types';
+import { CheckboxBaseComponentProps } from './types';
 
-function CheckboxBase(props: CheckboxBaseProps) {
+function CheckboxBase(props: CheckboxBaseComponentProps) {
   const {
     checked,
     onCheckedChange,
@@ -40,9 +40,9 @@ function CheckboxBase(props: CheckboxBaseProps) {
         )}
       >
         {checked === 'indeterminate' ? (
-          <MinusIcon className={clsx('h-3.5 w-3.5', icon)} strokeWidth={3} />
+          <MinusIcon className={clsx('h-2.5 w-2.5', icon)} strokeWidth={4} />
         ) : (
-          <CheckIcon className={clsx('h-3.5 w-3.5', icon)} strokeWidth={3} />
+          <CheckIcon className={clsx('h-2.5 w-2.5', icon)} strokeWidth={4} />
         )}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
