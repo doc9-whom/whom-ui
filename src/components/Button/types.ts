@@ -6,4 +6,8 @@ export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
 export interface ButtonProps
   extends React.ComponentPropsWithoutRef<'button'>,
-    ButtonVariantProps {}
+    ButtonVariantProps {
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
+  fullWidth?: boolean;
+}

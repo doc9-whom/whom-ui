@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
+import React from 'react';
 
 import { Button } from '../components';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const meta = {
   title: 'Components/Button',
@@ -16,6 +18,9 @@ const meta = {
     variant: 'primary',
     size: 'lg',
     disabled: false,
+    fullWidth: false,
+    startAdornment: undefined,
+    endAdornment: undefined,
   },
   argTypes: {
     variant: {
@@ -36,6 +41,15 @@ const meta = {
     },
     disabled: {
       control: { type: 'boolean' },
+    },
+    fullWidth: {
+      control: { type: 'boolean' },
+    },
+    startAdornment: {
+      table: { disable: true },
+    },
+    endAdornment: {
+      table: { disable: true },
     },
   },
 } satisfies Meta<typeof Button>;
@@ -83,4 +97,36 @@ export const Large: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true },
+};
+
+export const FullWidth: Story = {
+  args: { fullWidth: true },
+};
+
+export const WithStartAdornment: Story = {
+  args: {
+    startAdornment: <ArrowLeft size={16} />,
+  },
+};
+
+export const WithEndAdornment: Story = {
+  args: {
+    endAdornment: <ArrowRight size={16} />,
+  },
+};
+
+export const WithBothAdornments: Story = {
+  args: {
+    startAdornment: <ArrowLeft size={16} />,
+    endAdornment: <ArrowRight size={16} />,
+  },
+};
+
+export const FullFeatured: Story = {
+  args: {
+    fullWidth: true,
+    startAdornment: <ArrowLeft size={16} />,
+    endAdornment: <ArrowRight size={16} />,
+    children: 'Enviar',
+  },
 };
