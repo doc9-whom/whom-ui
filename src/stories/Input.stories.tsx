@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
+import { Search, X } from 'lucide-react';
 
 import { Input } from '../components';
-import { Search, X } from 'lucide-react'; // exemplo de ícones para adornos
 
 const meta = {
   title: 'Components/Input',

@@ -5,6 +5,22 @@
   --color-brand-600: #0a3db0;
 
   --color-text-disabled: #a9a9bc;
+
+  --color-info: theme('colors.gray.50');
+  --color-info-foreground: theme('colors.gray.900');
+  --color-info-background: theme('colors.gray.400');
+
+  --color-success: #e6f0f0;
+  --color-success-foreground: #09846f;
+  --color-success-background: #09846f;
+
+  --color-alert: theme('colors.amber.50');
+  --color-alert-foreground: theme('colors.amber.900');
+  --color-alert-background: theme('colors.amber.600');
+
+  --color-danger: theme('colors.rose.50');
+  --color-danger-foreground: theme('colors.rose.900');
+  --color-danger-background: theme('colors.rose.600');
 }
 
 @layer utilities {

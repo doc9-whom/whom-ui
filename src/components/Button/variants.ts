@@ -2,7 +2,11 @@ import { cva } from 'class-variance-authority';
 import clsx from 'clsx';
 
 const buttonVariants = cva(
-  'rounded-xl text-sm font-medium flex gap-2 items-center justify-between',
+  clsx(
+    'transition-all duration-100 cursor-pointer',
+    'active:scale-[0.97] active:brightness-95',
+    'rounded-xl text-sm font-medium flex gap-2 items-center justify-between',
+  ),
   {
     variants: {
       variant: {
