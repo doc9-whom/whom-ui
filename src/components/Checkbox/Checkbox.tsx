@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import { CheckboxBase } from '../CheckboxBase';
 import { CheckboxProps } from './types';
+import { useId } from 'react';
 
 function Checkbox(props: CheckboxProps) {
   const {
+    id,
     className,
     classNames,
     checked,
@@ -12,12 +14,17 @@ function Checkbox(props: CheckboxProps) {
     label,
     helperText,
     error,
+    labelProps,
     ...rest
   } = props;
+  const { className: labelClassName, ...restLabel } = labelProps ?? {};
+  const autoId = useId();
+  const checkboxId = id ?? autoId;
 
   return (
     <div className="flex gap-2" {...rest}>
       <CheckboxBase
+        id={checkboxId}
         className={clsx('mt-0.5', className)}
         classNames={classNames}
         checked={checked}
@@ -26,10 +33,13 @@ function Checkbox(props: CheckboxProps) {
       />
       <div className="flex flex-col gap-1">
         <label
+          htmlFor={checkboxId}
           className={clsx(
             { hidden: !label },
             'leading-5 tracking-normal font-medium',
+            labelClassName,
           )}
+          {...restLabel}
         >
           {label}
         </label>

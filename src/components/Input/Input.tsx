@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useId } from 'react';
 import clsx from 'clsx';
 
 import { InputProps } from './types';
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
+    id,
     className,
     fullWidth,
     label,
@@ -16,13 +17,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ...rest
   } = props;
 
+  const autoId = useId();
+  const inputId = id ?? autoId;
+
   return (
     <div
       className={clsx('flex flex-col gap-1', {
         'w-full': !!fullWidth,
       })}
     >
-      <label className={clsx({ hidden: !label }, 'text-gray-900')}>
+      <label
+        htmlFor={inputId}
+        className={clsx({ hidden: !label }, 'text-gray-900')}
+      >
         {label}
       </label>
       <div
@@ -41,6 +48,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       >
         {startAdornment}
         <input
+          id={inputId}
           ref={ref}
           disabled={disabled}
           className={clsx(

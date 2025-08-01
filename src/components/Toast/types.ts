@@ -18,5 +18,4 @@ export interface ToastContextType {
 export interface ToastProviderProps {
   children: React.ReactNode;
   duration?: number;
-  autoClose?: number;
 }

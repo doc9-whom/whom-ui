@@ -6,4 +6,5 @@ export interface CheckboxProps
   label?: string;
   helperText?: string;
   error?: boolean;
+  labelProps?: React.ComponentPropsWithoutRef<'label'>;
 }

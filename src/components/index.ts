@@ -6,6 +6,7 @@ import { Checkbox } from './Checkbox';
 import { RadioGroup } from './RadioGroup';
 import { Input } from './Input';
 import { ToastContext, ToastProvider, useToast } from './Toast';
+import { Alert } from './Alert';
 
 export {
   Button,
@@ -16,4 +17,5 @@ export {
   ToastContext,
   ToastProvider,
   useToast,
+  Alert,
 };

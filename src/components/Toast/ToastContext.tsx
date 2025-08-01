@@ -9,22 +9,13 @@ import { ToastContextType, ToastItem, ToastProviderProps } from './types';
 const ToastContext = createContext<ToastContextType | null>(null);
 
 function ToastProvider(props: ToastProviderProps) {
-  const { children, autoClose, duration = 4000 } = props;
+  const { children, duration = 4000 } = props;
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
-  const showToast = useCallback(
-    (toast: Omit<ToastItem, 'id'>) => {
-      const id = nanoid();
-      setToasts((prev) => [...prev, { ...toast, id }]);
-
-      if (autoClose) {
-        setTimeout(() => {
-          setToasts((prev) => prev.filter((t) => t.id !== id));
-        }, autoClose);
-      }
-    },
-    [autoClose],
-  );
+  const showToast = useCallback((toast: Omit<ToastItem, 'id'>) => {
+    const id = nanoid();
+    setToasts((prev) => [...prev, { ...toast, id }]);
+  }, []);
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -33,7 +24,7 @@ function ToastProvider(props: ToastProviderProps) {
   return (
     <ToastContext.Provider value={{ toast: showToast }}>
       {children}
-      <RadixToast.Provider swipeDirection="right">
+      <RadixToast.Provider swipeDirection="right" duration={duration}>
         {toasts.map(
           ({ id, title, description, variant, size, rounded, bordered }) => (
             <RadixToast.Root
@@ -42,7 +33,7 @@ function ToastProvider(props: ToastProviderProps) {
               duration={duration}
               className={toastClass({ variant, size, rounded, bordered })}
             >
-              <Info className="icon" />
+              <Info />
               <div className="w-full flex flex-col gap-1">
                 <RadixToast.Title asChild>
                   <h6>{title}</h6>
