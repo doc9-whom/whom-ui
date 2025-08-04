@@ -1,8 +1,9 @@
 import { cva } from 'class-variance-authority';
-import clsx from 'clsx';
+
+import { cn } from '../../utils';
 
 const checkboxBaseVariants = cva(
-  clsx(
+  cn(
     'focus-visible:outline-none focus-visible:ring-0',
     'bg-white h-4 w-4 rounded-md border-gray-200 border-2 shadow-[0_1px_2px_0_#0000000D]',
     'data-[state=checked]:bg-brand-500 data-[state=checked]:border-brand-500',

@@ -5,7 +5,7 @@ import { ptBR } from 'date-fns/locale';
 
 import { toastClass } from '../Toast/variants';
 import { AlertProps, AlertTimestampProps } from './types';
-import clsx from 'clsx';
+import { cn } from '../../utils';
 
 function AlertTimestamp(props: AlertTimestampProps) {
   const { date, dateFormat = 'dd MMM | HH:mm', className, ...rest } = props;
@@ -13,7 +13,7 @@ function AlertTimestamp(props: AlertTimestampProps) {
   if (!date) return <Fragment />;
 
   return (
-    <span className={clsx('', className)} {...rest}>
+    <span className={cn('', className)} {...rest}>
       {format(date, dateFormat, { locale: ptBR })}
     </span>
   );

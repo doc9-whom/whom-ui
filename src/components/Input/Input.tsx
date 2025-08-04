@@ -1,7 +1,7 @@
 import React, { useId } from 'react';
-import clsx from 'clsx';
 
 import { InputProps } from './types';
+import { cn } from '../../utils';
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
@@ -22,18 +22,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   return (
     <div
-      className={clsx('flex flex-col gap-1', {
+      className={cn('flex flex-col gap-1', {
         'w-full': !!fullWidth,
       })}
     >
       <label
         htmlFor={inputId}
-        className={clsx({ hidden: !label }, 'text-gray-900')}
+        className={cn({ hidden: !label }, 'text-gray-900')}
       >
         {label}
       </label>
       <div
-        className={clsx(
+        className={cn(
           'flex items-center',
           'bg-white border-1 border-gray-100 px-3 rounded-xl h-11 gap-x-2 shadow-[0_1px_2px_0_#0000000D]',
           'hover:border-gray-300',
@@ -51,7 +51,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           id={inputId}
           ref={ref}
           disabled={disabled}
-          className={clsx(
+          className={cn(
             'w-full h-full focus-visible:outline-none placeholder-gray-400 placeholder:font-light',
           )}
           {...rest}
@@ -59,7 +59,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         {endAdornment}
       </div>
       <small
-        className={clsx(
+        className={cn(
           { hidden: !helperText, 'text-rose-600': !!error },
           'text-gray-500 font-light',
         )}

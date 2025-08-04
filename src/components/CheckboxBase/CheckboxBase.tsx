@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { CheckIcon, MinusIcon } from 'lucide-react';
-import clsx from 'clsx';
 
 import { checkboxBaseVariants } from './variants';
 import { CheckboxBaseComponentProps } from './types';
+import { cn } from '../../utils';
 
 function CheckboxBase(props: CheckboxBaseComponentProps) {
   const {
@@ -27,22 +27,19 @@ function CheckboxBase(props: CheckboxBaseComponentProps) {
 
   return (
     <CheckboxPrimitive.Root
-      className={clsx(checkboxBaseVariants({}), className, root)}
+      className={cn(checkboxBaseVariants({}), className, root)}
       checked={checked}
       onCheckedChange={handleChange}
       disabled={disabled}
       {...rest}
     >
       <CheckboxPrimitive.Indicator
-        className={clsx(
-          'flex items-center justify-center text-white',
-          indicator,
-        )}
+        className={cn('flex items-center justify-center text-white', indicator)}
       >
         {checked === 'indeterminate' ? (
-          <MinusIcon className={clsx('h-2.5 w-2.5', icon)} strokeWidth={4} />
+          <MinusIcon className={cn('h-2.5 w-2.5', icon)} strokeWidth={4} />
         ) : (
-          <CheckIcon className={clsx('h-2.5 w-2.5', icon)} strokeWidth={4} />
+          <CheckIcon className={cn('h-2.5 w-2.5', icon)} strokeWidth={4} />
         )}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

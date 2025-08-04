@@ -7,6 +7,7 @@ import { RadioGroup } from './RadioGroup';
 import { Input } from './Input';
 import { ToastContext, ToastProvider, useToast } from './Toast';
 import { Alert } from './Alert';
+import { Select } from './Select';
 
 export {
   Button,
@@ -18,4 +19,5 @@ export {
   ToastProvider,
   useToast,
   Alert,
+  Select,
 };

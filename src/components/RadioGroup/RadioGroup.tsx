@@ -1,7 +1,8 @@
-import clsx from 'clsx';
 import React from 'react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
+
 import { RadioGroupProps } from './types';
+import { cn } from '../../utils';
 
 const RadioGroupComponent = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   (props, ref) => {
@@ -17,7 +18,7 @@ const RadioGroupComponent = React.forwardRef<HTMLDivElement, RadioGroupProps>(
           ) => (
             <div key={index} className="flex items-start gap-3">
               <RadioGroup.Item
-                className={clsx(
+                className={cn(
                   'mt-1 w-3.5 aspect-square rounded-full border flex items-center justify-center',
                   'border-gray-200 bg-white shadow-[0_1px_2px_0_#1212170D]',
                   'data-[state=checked]:border-[3.5px] data-[state=checked]:border-brand-500',
@@ -33,7 +34,7 @@ const RadioGroupComponent = React.forwardRef<HTMLDivElement, RadioGroupProps>(
               />
               <div className="flex flex-col">
                 <label
-                  className={clsx(
+                  className={cn(
                     { hidden: !label },
                     'leading-5 tracking-normal font-medium',
                     'text-sm text-gray-800 cursor-pointer',
@@ -44,7 +45,7 @@ const RadioGroupComponent = React.forwardRef<HTMLDivElement, RadioGroupProps>(
                   {label}
                 </label>
                 <small
-                  className={clsx(
+                  className={cn(
                     { hidden: !helperText },
                     'text-gray-500 font-light text-sm leading-5',
                     { 'text-rose-600': !!error },

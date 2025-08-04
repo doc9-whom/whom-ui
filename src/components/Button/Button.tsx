@@ -1,8 +1,8 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import { buttonVariants } from './variants';
 import { ButtonProps } from './types';
+import { cn } from '../../utils';
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props: ButtonProps, ref) => {
@@ -20,7 +20,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        className={clsx(
+        className={cn(
           buttonVariants({ variant, size }),
           { 'w-full': !!fullWidth },
           className,
