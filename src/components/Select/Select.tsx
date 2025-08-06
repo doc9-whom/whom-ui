@@ -1,30 +1,58 @@
+import { useId } from 'react';
 import { cn } from '../../utils';
 import * as S from '../ui/select';
-import { SelectProps } from './types';
+import { SelectOptionProps, SelectProps } from './types';
+
+const DefaultRenderItem = (option: SelectOptionProps, index: number) => (
+  <S.SelectItem key={index} value={option.value}>
+    {option.label}
+  </S.SelectItem>
+);
 
 function Select(props: SelectProps) {
   const {
+    id,
     name,
     value,
     options,
     fullWidth,
     helperText,
     error,
+    description,
     label,
     placeholder,
     onChange,
-    // multiple,
     startAdornment,
     endAdornment,
     disabled,
+    renderItem,
+    renderTriggerContent,
   } = props;
+
+  const autoId = useId();
+  const selectId = id ?? autoId;
+
+  const TriggerContent =
+    renderTriggerContent ?? (() => <S.SelectValue placeholder={placeholder} />);
 
   return (
     <div
-      className={cn('flex flex-col gap-1', {
+      className={cn('flex flex-col', {
         'w-full': !!fullWidth,
       })}
     >
+      <label
+        htmlFor={selectId}
+        className={cn(
+          {
+            hidden: !label,
+            'text-rose-600': !!error,
+          },
+          'text-gray-900 mb-1 text-sm',
+        )}
+      >
+        {label}
+      </label>
       <S.Select
         name={name}
         value={value}
@@ -32,35 +60,32 @@ function Select(props: SelectProps) {
         disabled={disabled}
       >
         <S.SelectTrigger
+          id={selectId}
           className={cn(
-            'h-11 rounded-xl px-3 gap-x-2 shadow-[0_1px_2px_0_#0000000D] border-1 border-gray-100 bg-white hover:border-gray-300 focus:border-brand-500 focus:shadow-[0_0_0_3px_#0A4AD61A] focus-visible:outline-none',
+            'h-11 rounded-xl px-3 gap-x-2 shadow-[0_1px_2px_0_#0000000D] border-1 border-gray-100 bg-white hover:border-gray-300 focus:border-brand-500 focus:shadow-[0_0_0_3px_#0A4AD61A] focus-visible:outline-none text-sm font-light',
             {
-              '!bg-gray-50 !border-gray-100': !!disabled,
+              '!bg-gray-50 !border-gray-100 text-gray-400': !!disabled,
               '!border-rose-600 focus:!shadow-[0_0_0_2px_#EC003F1A]': !!error,
               'w-full': !!fullWidth,
             },
           )}
         >
           {startAdornment}
-          <S.SelectValue placeholder={placeholder} />
+          <TriggerContent />
           {endAdornment}
         </S.SelectTrigger>
 
         <S.SelectContent>
           <S.SelectGroup>
-            {label && <S.SelectLabel>{label}</S.SelectLabel>}
-            {options.map((option, idx) => (
-              <S.SelectItem key={idx} value={option.value}>
-                {option.label}
-              </S.SelectItem>
-            ))}
+            {description && <S.SelectLabel>{description}</S.SelectLabel>}
+            {options.map(renderItem ?? DefaultRenderItem)}
           </S.SelectGroup>
         </S.SelectContent>
       </S.Select>
 
       {helperText && (
         <small
-          className={cn('text-gray-500 font-light', {
+          className={cn('text-gray-500 font-light mt-1', {
             'text-rose-600': !!error,
           })}
         >

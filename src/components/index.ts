@@ -8,6 +8,7 @@ import { Input } from './Input';
 import { ToastContext, ToastProvider, useToast } from './Toast';
 import { Alert } from './Alert';
 import { Select } from './Select';
+import { Chip } from './Chip';
 
 export {
   Button,
@@ -20,4 +21,5 @@ export {
   useToast,
   Alert,
   Select,
+  Chip,
 };
