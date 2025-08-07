@@ -22,9 +22,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
   return (
     <div
-      className={cn('flex flex-col gap-1', {
-        'w-full': !!fullWidth,
-      })}
+      className={cn(
+        'flex flex-col gap-1',
+        {
+          'w-full': !!fullWidth,
+        },
+        className,
+      )}
     >
       <label
         htmlFor={inputId}
@@ -43,7 +47,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             'w-full': !!fullWidth,
             '!border-rose-600 focus:!shadow-[0_0_0_2px_#EC003F1A]': !!error,
           },
-          className,
         )}
       >
         {startAdornment}
@@ -60,7 +63,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       </div>
       <small
         className={cn(
-          { hidden: !helperText, 'text-rose-600': !!error },
+          { hidden: !helperText, '!text-rose-600': !!error },
           'text-gray-500 font-light',
         )}
       >

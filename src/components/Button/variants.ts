@@ -4,8 +4,8 @@ import { cn } from '../../utils';
 const buttonVariants = cva(
   cn(
     'transition-all duration-100 cursor-pointer',
-    'active:scale-[0.97] active:brightness-95',
-    'rounded-xl text-sm font-medium flex gap-2 items-center justify-between',
+    'active:scale-[0.99] active:brightness-95',
+    'rounded-xl text-sm font-medium flex gap-2 items-center justify-center',
   ),
   {
     variants: {
