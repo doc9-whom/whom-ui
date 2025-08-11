@@ -1,10 +1,26 @@
-import { useCallback } from 'react';
+import { Fragment, useCallback } from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { CheckIcon, MinusIcon } from 'lucide-react';
 
 import { checkboxBaseVariants } from './variants';
-import { CheckboxBaseComponentProps } from './types';
+import {
+  CheckboxBaseComponentProps,
+  CheckboxIndicatorIconProps,
+} from './types';
 import { cn } from '../../utils';
+
+function CheckboxIndicatorIcon(props: CheckboxIndicatorIconProps) {
+  const { checked, className, variant } = props;
+
+  if (variant === 'circle') return <Fragment />;
+
+  if (checked === 'indeterminate')
+    return (
+      <MinusIcon className={cn('h-2.5 w-2.5', className)} strokeWidth={4} />
+    );
+
+  return <CheckIcon className={cn('h-2.5 w-2.5', className)} strokeWidth={4} />;
+}
 
 function CheckboxBase(props: CheckboxBaseComponentProps) {
   const {
@@ -13,6 +29,7 @@ function CheckboxBase(props: CheckboxBaseComponentProps) {
     disabled,
     className,
     classNames = {},
+    variant,
     ...rest
   } = props;
   const { root = '', indicator = '', icon = '' } = classNames;
@@ -27,7 +44,7 @@ function CheckboxBase(props: CheckboxBaseComponentProps) {
 
   return (
     <CheckboxPrimitive.Root
-      className={cn(checkboxBaseVariants({}), className, root)}
+      className={cn(checkboxBaseVariants({ variant, className }), root)}
       checked={checked}
       onCheckedChange={handleChange}
       disabled={disabled}
@@ -36,11 +53,7 @@ function CheckboxBase(props: CheckboxBaseComponentProps) {
       <CheckboxPrimitive.Indicator
         className={cn('flex items-center justify-center text-white', indicator)}
       >
-        {checked === 'indeterminate' ? (
-          <MinusIcon className={cn('h-2.5 w-2.5', icon)} strokeWidth={4} />
-        ) : (
-          <CheckIcon className={cn('h-2.5 w-2.5', icon)} strokeWidth={4} />
-        )}
+        <CheckboxIndicatorIcon checked={checked} className={icon} />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );

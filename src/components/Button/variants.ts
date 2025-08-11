@@ -13,7 +13,7 @@ const buttonVariants = cva(
         primary: cn(
           'bg-brand-500 text-white',
           'hover:bg-brand-600',
-          'focus:outline-none focus:shadow-[0_0_0_3px_#0a4ad633,0_0_0_1px_var(--color-brand-600),0_1px_2px_0_#0000000d,inset_0_0.75px_0_0_#ffffff33]',
+          'outline-brand',
           'disabled:bg-gray-300',
         ),
         primaryGray: cn(

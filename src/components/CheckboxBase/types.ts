@@ -3,7 +3,15 @@ import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 
 import { checkboxBaseVariants } from './variants';
 
+export interface CheckboxIndicatorIconProps
+  extends VariantProps<typeof checkboxBaseVariants> {
+  checked?: CheckboxStatus;
+  className?: string;
+}
+
 export type CheckboxStatus = boolean | 'indeterminate';
+
+export type CheckboxVariant = 'square' | 'circle';
 
 export interface CheckboxBaseProps {
   checked?: CheckboxStatus;

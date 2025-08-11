@@ -1,13 +1,7 @@
 import { useId } from 'react';
 import { cn } from '../../utils';
 import * as S from '../ui/select';
-import { SelectOptionProps, SelectProps } from './types';
-
-const DefaultRenderItem = (option: SelectOptionProps, index: number) => (
-  <S.SelectItem key={index} value={option.value}>
-    {option.label}
-  </S.SelectItem>
-);
+import { SelectProps } from './types';
 
 function Select(props: SelectProps) {
   const {
@@ -27,7 +21,10 @@ function Select(props: SelectProps) {
     disabled,
     renderItem,
     renderTriggerContent,
+    triggerProps,
   } = props;
+  const { className: triggerClassName, ...restTriggerProps } =
+    triggerProps ?? {};
 
   const autoId = useId();
   const selectId = id ?? autoId;
@@ -68,7 +65,9 @@ function Select(props: SelectProps) {
               '!border-rose-600 focus:!shadow-[0_0_0_2px_#EC003F1A]': !!error,
               'w-full': !!fullWidth,
             },
+            triggerClassName,
           )}
+          {...restTriggerProps}
         >
           {startAdornment}
           <TriggerContent />
@@ -78,7 +77,15 @@ function Select(props: SelectProps) {
         <S.SelectContent>
           <S.SelectGroup>
             {description && <S.SelectLabel>{description}</S.SelectLabel>}
-            {options.map(renderItem ?? DefaultRenderItem)}
+            {options.map((option, idx) => (
+              <S.SelectItem
+                key={idx}
+                value={option.value}
+                className={cn({ contents: !!renderItem })}
+              >
+                {renderItem?.(option, idx) ?? option.label}
+              </S.SelectItem>
+            ))}
           </S.SelectGroup>
         </S.SelectContent>
       </S.Select>

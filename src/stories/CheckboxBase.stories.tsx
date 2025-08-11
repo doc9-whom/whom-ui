@@ -37,3 +37,11 @@ export const Checked: Story = {
 export const Indeterminate: Story = {
   args: { checked: 'indeterminate' },
 };
+
+export const CheckedRounded: Story = {
+  args: { checked: true, variant: 'circle' },
+};
+
+export const UncheckedRounded: Story = {
+  args: { checked: false, variant: 'circle' },
+};
