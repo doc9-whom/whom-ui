@@ -1,0 +1,45 @@
+import type { SVGProps } from 'react';
+
+export default function Icon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M16 20V19C16 16.7909 14.2091 15 12 15H6C3.79086 15 2 16.7909 2 19V20"
+        stroke="#046D66"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="9"
+        cy="7"
+        r="4"
+        stroke="#046D66"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22 20V19C22 16.7909 20.2091 15 18 15V15"
+        stroke="#046D66"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 3C17.2091 3 19 4.79086 19 7C19 9.20914 17.2091 11 15 11"
+        stroke="#046D66"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

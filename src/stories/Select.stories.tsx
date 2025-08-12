@@ -125,7 +125,7 @@ export const MultipleSelectWithChip: Story = {
         />
       </div>
     ),
-    renderTriggerContent: () => (
+    triggerContent: (
       <div className="flex p-2 gap-2 h-full w-full">
         {Array.from({ length: 2 }).map((_, idx) => (
           <Chip

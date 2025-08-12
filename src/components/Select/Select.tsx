@@ -20,7 +20,7 @@ function Select(props: SelectProps) {
     endAdornment,
     disabled,
     renderItem,
-    renderTriggerContent,
+    triggerContent: Trigger,
     triggerProps,
   } = props;
   const { className: triggerClassName, ...restTriggerProps } =
@@ -29,8 +29,7 @@ function Select(props: SelectProps) {
   const autoId = useId();
   const selectId = id ?? autoId;
 
-  const TriggerContent =
-    renderTriggerContent ?? (() => <S.SelectValue placeholder={placeholder} />);
+  const TriggerContent = Trigger ?? <S.SelectValue placeholder={placeholder} />;
 
   return (
     <div
@@ -70,7 +69,7 @@ function Select(props: SelectProps) {
           {...restTriggerProps}
         >
           {startAdornment}
-          <TriggerContent />
+          {TriggerContent}
           {endAdornment}
         </S.SelectTrigger>
 

@@ -9,6 +9,13 @@ import { ToastContext, ToastProvider, useToast } from './Toast';
 import { Alert } from './Alert';
 import { Select } from './Select';
 import { Chip } from './Chip';
+import { AutoComplete } from './AutoComplete';
+import { Divider } from './Divider';
+import { Link } from './Link';
+import { Separator } from './Separator';
+import { Typography } from './Typography';
+
+import * as Icons from './icons';
 
 export {
   Button,
@@ -22,4 +29,10 @@ export {
   Alert,
   Select,
   Chip,
+  AutoComplete,
+  Divider,
+  Link,
+  Separator,
+  Typography,
+  Icons,
 };

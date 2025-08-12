@@ -1,26 +1,25 @@
-import { SelectTrigger } from '../ui/select';
-
-export interface SelectOptionProps {
+export interface AutoCompleteOptionProps {
   label: string;
   value: string;
 }
-
-export interface SelectProps {
+export interface AutoCompleteProps {
   id?: string;
   name?: string;
   value?: string;
-  options: SelectOptionProps[];
+  options: AutoCompleteOptionProps[];
   fullWidth?: boolean;
   placeholder?: string;
   label?: string;
   description?: string;
   helperText?: string;
-  renderItem?: (option: SelectOptionProps, index: number) => React.ReactElement;
-  triggerContent?: React.ReactNode;
+  renderItem?: (
+    option: AutoCompleteOptionProps,
+    index: number,
+  ) => React.ReactElement;
   error?: boolean;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
   onChange?: (value: string) => void;
   disabled?: boolean;
-  triggerProps?: React.ComponentPropsWithoutRef<typeof SelectTrigger>;
+  triggerProps?: React.ComponentPropsWithoutRef<'div'>;
 }
