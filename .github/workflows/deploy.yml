@@ -35,7 +35,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: sa-east-1
 
-      - run: aws s3 sync ./storybook-static s3://whom-ui-storybook  --delete
+      - run: aws s3 sync ./storybook-static s3://storybook-whom-ui  --delete
 
       # - name: Create CloudFront Invalidation
       #   run: |

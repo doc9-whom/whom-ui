@@ -3,6 +3,7 @@ import { ElementType } from 'react';
 import { buttonVariants } from './variants';
 import { ButtonProps } from './types';
 import { cn } from '../../utils';
+import { Loader2Icon } from 'lucide-react';
 
 function Button<T extends ElementType = 'button'>(props: ButtonProps<T>) {
   const {
@@ -14,6 +15,8 @@ function Button<T extends ElementType = 'button'>(props: ButtonProps<T>) {
     startAdornment,
     endAdornment,
     children,
+    loading,
+    disabled,
     ...rest
   } = props;
   const Component = as ?? 'button';
@@ -25,10 +28,15 @@ function Button<T extends ElementType = 'button'>(props: ButtonProps<T>) {
         { 'w-full': !!fullWidth },
         className,
       )}
+      disabled={loading ?? disabled}
       {...rest}
     >
       {startAdornment}
-      {children}
+      {loading ? (
+        <Loader2Icon size={16} color="white" className="animate-spin" />
+      ) : (
+        children
+      )}
       {endAdornment}
     </Component>
   );

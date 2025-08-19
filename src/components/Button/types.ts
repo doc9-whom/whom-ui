@@ -15,6 +15,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
   fullWidth?: boolean;
+  loading?: boolean;
 } & ButtonVariantProps &
   Omit<
     ComponentPropsWithoutRef<T>,
