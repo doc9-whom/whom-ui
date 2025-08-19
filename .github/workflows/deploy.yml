@@ -37,10 +37,12 @@ jobs:
 
       - run: aws s3 sync ./storybook-static s3://storybook-whom-ui  --delete
 
+      - name: Configure NPM authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - name: Publish to NPM
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
 
       # - name: Create CloudFront Invalidation
       #   run: |
