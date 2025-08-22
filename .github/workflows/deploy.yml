@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - uses: actions/setup-node@v4
-      - uses: aws-actions/configure-aws-credentials@v1
+
       - run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Use Node.js ${{ matrix.node-version }}
