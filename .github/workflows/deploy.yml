@@ -54,7 +54,7 @@ jobs:
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
-            --paths "/storybook/latest/*"
+            --paths "/latest/*"
 
       - name: Create CloudFront Invalidation (version)
         if: steps.pkg.outputs.version != ''
@@ -62,7 +62,7 @@ jobs:
           VERSION="${{ steps.pkg.outputs.version }}"
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
-            --paths "/storybook/${VERSION}/*"
+            --paths "/${VERSION}/*"
 
       - name: Configure NPM authentication
         run: |
