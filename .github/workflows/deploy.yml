@@ -50,12 +50,6 @@ jobs:
           VERSION="${{ steps.pkg.outputs.version }}"
           aws s3 sync ./storybook-static "s3://storybook-whom-ui/${VERSION}"
 
-      - name: Upload versions.json to S3
-        run: |
-          aws s3 cp versions.json "s3://storybook-whom-ui/versions.json" \
-            --content-type application/json \
-            --cache-control "no-cache"
-
       # - name: Create CloudFront Invalidation (latest + versions.json)
       #   run: |
       #     aws cloudfront create-invalidation \
