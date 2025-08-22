@@ -50,19 +50,19 @@ jobs:
           VERSION="${{ steps.pkg.outputs.version }}"
           aws s3 sync ./storybook-static "s3://storybook-whom-ui/${VERSION}"
 
-      # - name: Create CloudFront Invalidation (latest + versions.json)
-      #   run: |
-      #     aws cloudfront create-invalidation \
-      #       --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
-      #       --paths "/storybook/latest/*"
+      - name: Create CloudFront Invalidation (latest + versions.json)
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
+            --paths "/storybook/latest/*"
 
-      # - name: Create CloudFront Invalidation (version)
-      #   if: steps.pkg.outputs.version != ''
-      #   run: |
-      #     VERSION="${{ steps.pkg.outputs.version }}"
-      #     aws cloudfront create-invalidation \
-      #       --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
-      #       --paths "/storybook/${VERSION}/*"
+      - name: Create CloudFront Invalidation (version)
+        if: steps.pkg.outputs.version != ''
+        run: |
+          VERSION="${{ steps.pkg.outputs.version }}"
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
+            --paths "/storybook/${VERSION}/*"
 
       - name: Configure NPM authentication
         run: |
