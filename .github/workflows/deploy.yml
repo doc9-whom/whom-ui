@@ -29,6 +29,13 @@ jobs:
         run: |
           zip -r dist.zip ./storybook-static
 
+      - name: Configure NPM authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Publish to NPM
+        run: npm publish
+
       - name: Get package name and version from package.json
         id: pkg
         run: |
@@ -63,10 +70,3 @@ jobs:
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
             --paths "/${VERSION}/*"
-
-      - name: Configure NPM authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-      - name: Publish to NPM
-        run: npm publish
