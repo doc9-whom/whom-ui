@@ -14,7 +14,9 @@ jobs:
         node-version: [22.17.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v4
+      - uses: aws-actions/configure-aws-credentials@v1
+      - run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
@@ -29,13 +31,46 @@ jobs:
         run: |
           zip -r dist.zip ./storybook-static
 
+      - name: Get package name and version from package.json
+        id: pkg
+        run: |
+          echo "name=$(node -p "require('./package.json').name")" >> $GITHUB_OUTPUT
+          echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: sa-east-1
 
-      - run: aws s3 sync ./storybook-static s3://storybook-whom-ui  --delete
+      - name: Publish storybook to latest
+        run: |
+          aws s3 sync ./storybook-static s3://storybook-whom-ui/latest  --delete
+
+      - name: Publish storybook to /<version>
+        run: |
+          VERSION="${{ steps.pkg.outputs.version }}"
+          aws s3 sync ./storybook-static "s3://storybook-whom-ui/${VERSION}"
+
+      - name: Upload versions.json to S3
+        run: |
+          aws s3 cp versions.json "s3://storybook-whom-ui/versions.json" \
+            --content-type application/json \
+            --cache-control "no-cache"
+
+      # - name: Create CloudFront Invalidation (latest + versions.json)
+      #   run: |
+      #     aws cloudfront create-invalidation \
+      #       --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
+      #       --paths "/storybook/latest/*"
+
+      # - name: Create CloudFront Invalidation (version)
+      #   if: steps.pkg.outputs.version != ''
+      #   run: |
+      #     VERSION="${{ steps.pkg.outputs.version }}"
+      #     aws cloudfront create-invalidation \
+      #       --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
+      #       --paths "/storybook/${VERSION}/*"
 
       - name: Configure NPM authentication
         run: |
@@ -43,9 +78,3 @@ jobs:
 
       - name: Publish to NPM
         run: npm publish
-
-      # - name: Create CloudFront Invalidation
-      #   run: |
-      #     aws cloudfront create-invalidation \
-      #       --distribution-id ${{ secrets.CLOUD_FRONT_ID }} \
-      #       --paths "/*"
